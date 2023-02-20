@@ -163,7 +163,7 @@ Use the [Pricing calculator](https://azure.microsoft.com/pricing/calculator) to 
 
 *This article is maintained by Microsoft. It was originally written by the following contributors.* 
 
-Principal authors:
+Principal author:
 
  - [Jonathon Frost](https://www.linkedin.com/in/jjfrost/) | Principal Software Engineer
  
@@ -187,4 +187,4 @@ Principal authors:
 - [Unisys mainframe migration](../../reference-architectures/migration/unisys-mainframe-migration.yml)
 - [IBM z/OS mainframe migration with Asysco AMT](asysco-zos-migration.yml)
 - [High-volume batch transaction processing](process-batch-transactions.yml)
-- [Modernize mainframe & midrange data](../../reference-architectures/migration/modernize-mainframe-data-to-azure.yml)
+- [Modernize mainframe & midrange data](/azure/architecture/example-scenario/mainframe/modernize-mainframe-data-to-azure)

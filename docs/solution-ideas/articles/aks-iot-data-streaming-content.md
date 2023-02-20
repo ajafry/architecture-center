@@ -14,9 +14,9 @@ This solution utilizes the following functionality:
 
 ## Architecture
 
-![Architecture Diagram](../media/aks-iot-data-streaming.png)
+![Architecture diagram of instant IoT data streaming with AKS.](../media/aks-iot-data-streaming.svg)
 
-*Download an [SVG](../media/aks-iot-data-streaming.svg) file of the diagram.*
+*Download a [Visio file](https://arch-center.azureedge.net/aks-iot-data-streaming.vsdx) of this architecture.*
 
 ### Dataflow
 
@@ -50,7 +50,7 @@ This example scenario uses several Azure components:
 
 *This article is maintained by Microsoft. It was originally written by the following contributors.* 
 
-Principal authors:
+Principal author:
 
  - [Stella Lin](https://www.linkedin.com/in/fengxiaoyuelin/) | Principal Product Manager
  

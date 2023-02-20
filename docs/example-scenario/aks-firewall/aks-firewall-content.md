@@ -2,9 +2,9 @@ This article describes how to create a private AKS cluster in a hub-and-spoke ne
 
 ## Architecture
 
-![Diagram that shows an architecture that has a private A K S cluster in a hub-and-spoke network topology.](media/aks-firewall.png)
+:::image type="content" border="false" source="media/aks-firewall.svg" alt-text="Diagram that shows an architecture that has a private A K S cluster in a hub-and-spoke network topology." lightbox="media/aks-firewall.svg":::
 
-*Download a [Visio file](https://arch-center.azureedge.net/main-architecture.vsdx) of this architecture.*
+*Download a [Visio file](https://arch-center.azureedge.net/aks-firewall-digrams.vsdx) of this architecture.*
 
 ### Workflow
 
@@ -96,7 +96,7 @@ Azure Firewall supports three different SKUs to cater to a wide range of custome
 
 The following table shows the features of the three Azure Firewall SKUs. For more information, see [Azure Firewall pricing](https://azure.microsoft.com/pricing/details/azure-firewall).
 
-![Features of the three Azure Firewall SKUs](./media/firewall-skus.png)
+![Screenshot that shows features of the three Azure Firewall SKUs](./media/firewall-skus.png)
 
 By default, AKS clusters have unrestricted outbound internet access. This level of network access allows nodes and services that run in the AKS cluster to access external resources as needed. If you want to restrict egress traffic, a limited number of ports and addresses must remain accessible to maintain healthy cluster maintenance tasks. The easiest way to provide security for the outbound traffic from a Kubernetes cluster like AKS is to use a software firewall that can control outbound traffic based on domain names. Azure Firewall can restrict outbound HTTP and HTTPS traffic based on the fully qualified domain name (FQDN) of the destination. You can also configure your firewall and security rules to allow these required ports and addresses. For more information, see [Control egress traffic for cluster nodes in AKS](/azure/aks/limit-egress-traffic).
 
@@ -119,7 +119,7 @@ To route the traffic of your AKS workloads to the Azure Firewall in the hub virt
 
 For more information, see [Tutorial: Deploy and configure Azure Firewall using the Azure portal](/azure/firewall/tutorial-firewall-deploy-portal#create-a-default-route).
 
-![Diagram that shows how to avoid asymmetric routing when you use Azure Firewall in front of your workloads.](media/firewall-lb-asymmetric.png)
+:::image type="content" border="false" source="media/firewall-lb-asymmetric.svg" alt-text="Diagram that shows how to avoid asymmetric routing when you use Azure Firewall in front of your workloads." lightbox="media/firewall-lb-asymmetric.svg":::
 
 For more information, see:
 
@@ -138,9 +138,7 @@ You can deploy a single [Windows](/azure/devops/pipelines/agents/v2-windows) or 
 
 If the subnets that host the node pools of your private AKS cluster are configured to route the egress traffic to an Azure Firewall via a route table and user-defined route, make sure to create the proper application and network rules. These rules need to allow the agent to access external sites to download and install tools like [Docker](https://www.docker.com), [Kubectl](https://kubectl.docs.kubernetes.io/guides/introduction/kubectl), [Azure CLI](/cli/azure/install-azure-cli), and [Helm](https://helm.sh) on the agent virtual machine. For more information, see [Run a self-hosted agent in Docker](/azure/devops/pipelines/agents/docker) and [Build and deploy Azure DevOps Pipeline Agent on AKS](https://github.com/ganrad/Az-DevOps-Agent-On-AKS).
 
-![Diagram that shows deployment of workloads to a private AKS cluster for use with Azure DevOps.](media/self-hosted-agent.png)
-
-*Download a [Visio file](https://arch-center.azureedge.net/devops.vsdx) of this architecture.*
+:::image type="content" border="false" source="media/self-hosted-agent.svg" alt-text="Diagram that shows deployment of workloads to a private AKS cluster for use with Azure DevOps." lightbox="media/self-hosted-agent.svg":::
 
 ### Use Azure Firewall in front of a public Standard Load Balancer
 
@@ -148,9 +146,8 @@ Resource definitions in the [Terraform modules](https://github.com/Azure-Samples
 
 [The sample](https://github.com/Azure-Samples/private-aks-cluster-terraform-devops) associated with this article contains an [Azure DevOps CD pipeline](https://github.com/Azure-Samples/private-aks-cluster-terraform-devops/blob/main/pipelines/cd-redmine-via-helm.yml) that shows how to deploy a workload to a private AKS cluster by using an [Azure DevOps pipeline](/azure/devops/pipelines/get-started/what-is-azure-pipelines) that runs on a [self-hosted agent](/azure/devops/pipelines/agents/agents?tabs=browser). The sample deploys the Bitnami [redmine](https://artifacthub.io/packages/helm/bitnami/redmine) project management web application by using a public [Helm](https://helm.sh) chart. This diagram shows the network topology of the sample:
 
-![Diagram that shows Azure Firewall in front of a public Standard Load Balancer.](media/firewall-public-load-balancer.png)
 
-*Download a [Visio file](https://arch-center.azureedge.net/devops-self-hosted.vsdx) of this architecture.*
+:::image type="content" border="false" source="media/firewall-public-load-balancer.svg" alt-text="Diagram that shows Azure Firewall in front of a public Standard Load Balancer." lightbox="media/firewall-public-load-balancer.svg":::
 
 Here's the message flow:
 
@@ -166,9 +163,7 @@ For more information, see [Use Azure Firewall in front of the Public Standard Lo
 
 In the [sample](https://github.com/Azure-Samples/private-aks-cluster-terraform-devops) associated with this article, an ASP.NET Core application is hosted as a service by an AKS cluster and fronted by an [NGINX ingress controller](https://kubernetes.github.io/ingress-nginx). The [NGINX ingress controller](https://kubernetes.github.io/ingress-nginx) is exposed via an internal load balancer that has a private IP address in the spoke virtual network that hosts the AKS cluster. For more information, see [Create an ingress controller to an internal virtual network in AKS](/azure/aks/ingress-internal-ip). When you deploy an NGINX ingress controller, or more generally a `LoadBalancer` or `ClusterIP` service, with the `service.beta.kubernetes.io/azure-load-balancer-internal: "true"` annotation in the metadata section, an internal standard load balancer called `kubernetes-internal` is created under the node resource group. For more information, see [Use an internal load balancer with AKS](/azure/aks/internal-lb). As shown in the following diagram, the test web application is exposed by the Azure Firewall via a dedicated Azure public IP.  
 
-![Diagram that shows Azure Firewall in front of an internal Standard Load Balancer.](media/firewall-internal-load-balancer.png)
-
-*Download a [Visio file](https://arch-center.azureedge.net/internal-load-balancer.vsdx) of this architecture.*
+:::image type="content" border="false" source="media/firewall-internal-load-balancer.svg" alt-text="Diagram that shows Azure Firewall in front of an internal Standard Load Balancer." lightbox="media/firewall-internal-load-balancer.svg":::
 
 Here's the message flow:
 
@@ -300,7 +295,7 @@ Principal author:
 
 - [Paolo Salvatori](https://www.linkedin.com/in/paolo-salvatori) | Principal Service Engineer
 
-*This article is maintained by Microsoft. It was originally written by the following contributors.* 
+*To see non-public LinkedIn profiles, sign in to LinkedIn.* 
 
 ## Next steps
 
